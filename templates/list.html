@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<a href="/story">Add a new story</a>
+<table>
+    <tr>
+        {% for header in headers %}
+            <th>{{ header | replace('_', ' ') }}</th>
+        {% endfor %}
+    </tr>
+    {% for user_story in user_stories %}
+    <tr>
+        {% for col in user_story %}
+            <td>{{ user_story.get(col) | safe }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

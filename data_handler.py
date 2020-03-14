@@ -7,10 +7,18 @@ STATUSES = ['planning', 'todo', 'in progress', 'review', 'done']
 
 
 def get_all_user_story():
-    f = open(DATA_FILE_PATH)
-    reader = csv.DictReader(f)
-    return [row for row in reader]
+    f = open('test_csv.csv', 'r')
+    return csv.DictReader(f)
 
 
-# if __name__ == '__main__':
-#     print(get_all_user_story())
+def write_data(a):
+    f = open('test_csv.csv', 'w')
+    fieldnames = ['a', 'b', 'c', 'd', 'e']
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    a = [{'a': 1, 'b': 2, 'c': 3, 'd': "dsjv jdhv jdh vj ,dcfsvsve", 'e': a}]
+    writer.writerow(a[0])
+
+
+if __name__ == '__main__':
+    # print(get_all_user_story()[0])
+    write_data()

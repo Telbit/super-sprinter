@@ -13,6 +13,14 @@ def route_list():
     return render_template('list.html', user_stories=user_stories, headers=data_handler.DATA_HEADER)
 
 
+@app.route('/story', methods=['GET', 'POST'])
+def story_page():
+    if request.method == 'POST':
+        a = request.form["user_story"]
+        data_handler.write_data(a)
+    return render_template('story.html')
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',

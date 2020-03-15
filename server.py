@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from _collections import OrderedDict
 
 import data_handler
 
@@ -15,10 +16,20 @@ def route_list():
 
 @app.route('/story', methods=['GET', 'POST'])
 def story_page():
+    new_data = OrderedDict()
+    user_stories = data_handler.get_all_user_story()
     if request.method == 'POST':
-        a = request.form["user_story"]
-        data_handler.write_data(a)
-    return render_template('story.html')
+        new_data['id'] = len(user_stories) + 1
+        new_data['title'] = request.form['story_title']
+        new_data['user_story'] = str(request.form["user_story"]).replace('\n', '<br>')
+        new_data['acceptance_criteria'] = str(request.form["acceptance_criteria"]).replace('\n', '<br>')
+        new_data['business_value'] = request.form['business_value']
+        new_data['estimation'] = request.form['estimation']
+        new_data['status'] = 'no status'
+        user_stories.append(new_data)
+        data_handler.write_data(user_stories)
+    return render_template('story.html', statuses=data_handler.STATUSES,
+                           status_visibility='hidden', button_text='Add new User Story')
 
 
 if __name__ == '__main__':

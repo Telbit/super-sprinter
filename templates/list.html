@@ -15,7 +15,11 @@
     {% for user_story in user_stories %}
     <tr>
         {% for col in user_story %}
-            <td>{{ user_story.get(col) | safe }}</td>
+            {% if col == 'title' %}
+                <td><a href="/update{{ user_story.get('id') }}">{{ user_story.get(col) | safe }}</a></td>
+            {% else %}
+                <td>{{ user_story.get(col) | safe }}</td>
+            {% endif %}
         {% endfor %}
     </tr>
     {% endfor %}

@@ -21,4 +21,3 @@ def write_data(new_data):
     writer = csv.DictWriter(f, fieldnames=fieldnames)
     for i in new_data:
         writer.writerow(i)
-

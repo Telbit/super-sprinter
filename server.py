@@ -19,7 +19,7 @@ def story_page():
     new_data = OrderedDict()
     user_stories = data_handler.get_all_user_story()  # ezt ----------------------------------------
     if request.method == 'POST':
-        new_data['id'] = len(user_stories) + 1  # ezt --------------------------------------------------
+        new_data['id'] = len(user_stories) + 1  # ezt ----------------------------------------------
         new_data['title'] = request.form['story_title']
         new_data['user_story'] = str(request.form["user_story"]).replace('\n', '<br>')
         new_data['acceptance_criteria'] = str(request.form["acceptance_criteria"]).replace('\n', '<br>')
